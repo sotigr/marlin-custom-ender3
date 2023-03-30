@@ -23,7 +23,7 @@
 
 /**
  * Geeetech GTM32 Pro VB board pin assignments
- * https://www.geeetech.com/wiki/index.php/File:Hardware_GTM32_PRO_VB.pdf
+ * http://www.geeetech.com/wiki/index.php/File:Hardware_GTM32_PRO_VB.pdf
  *
  * Also applies to GTM32 Pro VD
  */
@@ -115,7 +115,7 @@
 //
 // These are FAN PWM pins on EXT0..EXT2 connectors.
 //
-//#define FAN0_PIN                          PB9   // EXT0 port
+//#define FAN_PIN                           PB9   // EXT0 port
 #define FAN1_PIN                            PB8   // EXT1 port
 #define FAN2_PIN                            PB7   // EXT2 port
 

@@ -61,7 +61,7 @@ TouchButtons touchBt;
 
 void TouchButtons::init() {
   touchIO.Init();
-  TERN_(HAS_TOUCH_SLEEP, next_sleep_ms = millis() + SEC_TO_MS(ui.sleep_timeout_minutes * 60));
+  TERN_(HAS_TOUCH_SLEEP, next_sleep_ms = millis() + SEC_TO_MS(TOUCH_IDLE_SLEEP));
 }
 
 uint8_t TouchButtons::read_buttons() {
@@ -91,7 +91,7 @@ uint8_t TouchButtons::read_buttons() {
         y = uint16_t((uint32_t(y) * TOUCH_CALIBRATION_Y) >> 16) + TOUCH_OFFSET_Y;
       #endif
     #elif ENABLED(TFT_TOUCH_DEVICE_GT911)
-      const bool is_touched = (TOUCH_ORIENTATION == TOUCH_PORTRAIT ? touchIO.getPoint(&y, &x) : touchIO.getPoint(&x, &y));
+      bool is_touched = (TOUCH_ORIENTATION == TOUCH_PORTRAIT ? touchIO.getPoint(&y, &x) : touchIO.getPoint(&x, &y));
       if (!is_touched) return 0;
     #endif
 
@@ -135,7 +135,7 @@ uint8_t TouchButtons::read_buttons() {
         WRITE(TFT_BACKLIGHT_PIN, HIGH);
       #endif
     }
-    next_sleep_ms = millis() + SEC_TO_MS(ui.sleep_timeout_minutes * 60);
+    next_sleep_ms = millis() + SEC_TO_MS(TOUCH_IDLE_SLEEP);
   }
 
 #endif // HAS_TOUCH_SLEEP

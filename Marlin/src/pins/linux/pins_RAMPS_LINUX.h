@@ -161,21 +161,21 @@
 #define HEATER_0_PIN                MOSFET_A_PIN
 
 #if FET_ORDER_EFB                                 // Hotend, Fan, Bed
-  #define FAN0_PIN                  MOSFET_B_PIN
+  #define FAN_PIN                   MOSFET_B_PIN
   #define HEATER_BED_PIN            MOSFET_C_PIN
 #elif FET_ORDER_EEF                               // Hotend, Hotend, Fan
   #define HEATER_1_PIN              MOSFET_B_PIN
-  #define FAN0_PIN                  MOSFET_C_PIN
+  #define FAN_PIN                   MOSFET_C_PIN
 #elif FET_ORDER_EEB                               // Hotend, Hotend, Bed
   #define HEATER_1_PIN              MOSFET_B_PIN
   #define HEATER_BED_PIN            MOSFET_C_PIN
 #elif FET_ORDER_EFF                               // Hotend, Fan, Fan
-  #define FAN0_PIN                  MOSFET_B_PIN
+  #define FAN_PIN                   MOSFET_B_PIN
   #define FAN1_PIN                  MOSFET_C_PIN
 #elif FET_ORDER_SF                                // Spindle, Fan
-  #define FAN0_PIN                  MOSFET_C_PIN
+  #define FAN_PIN                   MOSFET_C_PIN
 #else                                             // Non-specific are "EFB" (i.e., "EFBF" or "EFBE")
-  #define FAN0_PIN                  MOSFET_B_PIN
+  #define FAN_PIN                   MOSFET_B_PIN
   #define HEATER_BED_PIN            MOSFET_C_PIN
   #if HOTENDS == 1 && DISABLED(HEATERS_PARALLEL)
     #define FAN1_PIN                MOSFET_D_PIN
@@ -184,8 +184,8 @@
   #endif
 #endif
 
-#ifndef FAN0_PIN
-  #define FAN0_PIN                             4  // IO pin. Buffer needed
+#ifndef FAN_PIN
+  #define FAN_PIN                              4  // IO pin. Buffer needed
 #endif
 
 //
@@ -247,16 +247,18 @@
 #endif
 
 /**
- * Default pins for TMC SPI
+ * Default pins for TMC software SPI
  */
-#ifndef TMC_SPI_MOSI
-  #define TMC_SPI_MOSI                        66
-#endif
-#ifndef TMC_SPI_MISO
-  #define TMC_SPI_MISO                        44
-#endif
-#ifndef TMC_SPI_SCK
-  #define TMC_SPI_SCK                         64
+#if ENABLED(TMC_USE_SW_SPI)
+  #ifndef TMC_SW_MOSI
+    #define TMC_SW_MOSI                       66
+  #endif
+  #ifndef TMC_SW_MISO
+    #define TMC_SW_MISO                       44
+  #endif
+  #ifndef TMC_SW_SCK
+    #define TMC_SW_SCK                        64
+  #endif
 #endif
 
 #if HAS_TMC_UART
@@ -394,8 +396,8 @@
 
   #define SD_DETECT_PIN                       41
 
-  #define SPI_FLASH
-  #if ENABLED(SPI_FLASH)
+  #define HAS_SPI_FLASH                        1
+  #if HAS_SPI_FLASH
     #define SPI_DEVICE                         1
     #define SPI_FLASH_SIZE             0x1000000  // 16MB
     #define SPI_FLASH_CS_PIN                  31
@@ -441,19 +443,6 @@
       #endif
       #ifndef TOUCH_CALIBRATION_Y
         #define TOUCH_CALIBRATION_Y        20415
-      #endif
-      #ifndef TOUCH_OFFSET_X
-        #define TOUCH_OFFSET_X                 2
-      #endif
-      #ifndef TOUCH_OFFSET_Y
-        #define TOUCH_OFFSET_Y                 1
-      #endif
-    #elif ENABLED(TFT_RES_1024x600)
-      #ifndef TOUCH_CALIBRATION_X
-        #define TOUCH_CALIBRATION_X        65533
-      #endif
-      #ifndef TOUCH_CALIBRATION_Y
-        #define TOUCH_CALIBRATION_Y        38399
       #endif
       #ifndef TOUCH_OFFSET_X
         #define TOUCH_OFFSET_X                 2

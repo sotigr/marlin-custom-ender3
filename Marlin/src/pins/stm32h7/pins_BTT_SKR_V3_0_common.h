@@ -21,7 +21,9 @@
  */
 #pragma once
 
-#include "env_validate.h"
+#if NOT_TARGET(STM32H7)
+  #error "Oops! Select an STM32H7 board in 'Tools > Board.'"
+#endif
 
 // If you have the BigTreeTech driver expansion module, enable BTT_MOTOR_EXPANSION
 // https://github.com/bigtreetech/BTT-Expansion-module/tree/master/BTT%20EXP-MOT
@@ -44,7 +46,7 @@
   #define SOFT_I2C_EEPROM                         // Force the use of Software I2C
   #define I2C_SCL_PIN                       PA14
   #define I2C_SDA_PIN                       PA13
-  #define MARLIN_EEPROM_SIZE              0x1000  // 4K
+  #define MARLIN_EEPROM_SIZE              0x1000  // 4KB
 #endif
 
 //
@@ -239,8 +241,8 @@
 #ifndef HEATER_BED_PIN
   #define HEATER_BED_PIN                    PD7   // Hotbed
 #endif
-#ifndef FAN0_PIN
-  #define FAN0_PIN                          PB7   // Fan0
+#ifndef FAN_PIN
+  #define FAN_PIN                           PB7   // Fan0
 #endif
 
 #if HAS_CUTTER
@@ -260,16 +262,18 @@
 #endif // SPINDLE_FEATURE || LASER_FEATURE
 
 //
-// SPI pins for TMC2130 stepper drivers
+// Software SPI pins for TMC2130 stepper drivers
 //
-#ifndef TMC_SPI_MOSI
-  #define TMC_SPI_MOSI                      PE13
-#endif
-#ifndef TMC_SPI_MISO
-  #define TMC_SPI_MISO                      PE15
-#endif
-#ifndef TMC_SPI_SCK
-  #define TMC_SPI_SCK                       PE14
+#if ENABLED(TMC_USE_SW_SPI)
+  #ifndef TMC_SW_MOSI
+    #define TMC_SW_MOSI                     PE13
+  #endif
+  #ifndef TMC_SW_MISO
+    #define TMC_SW_MISO                     PE15
+  #endif
+  #ifndef TMC_SW_SCK
+    #define TMC_SW_SCK                      PE14
+  #endif
 #endif
 
 #if HAS_TMC_UART

@@ -55,7 +55,6 @@
 // eu         Basque-Euskera
 // fi         Finnish
 // fr         French
-// fr_na      French without accents (DWIN T5UID1 touchscreen)
 // gl         Galician
 // hr         Croatian
 // hu         Hungarian
@@ -175,7 +174,6 @@
 #define STR_SD_VOL_INIT_FAIL                "volume.init failed"
 #define STR_SD_OPENROOT_FAIL                "openRoot failed"
 #define STR_SD_CARD_OK                      "SD card ok"
-#define STR_SD_CARD_RELEASED                "SD card released"
 #define STR_SD_WORKDIR_FAIL                 "workDir open failed"
 #define STR_SD_OPEN_FILE_FAIL               "open failed, File: "
 #define STR_SD_FILE_OPENED                  "File opened: "
@@ -230,9 +228,10 @@
 #define STR_PID_DEBUG_INPUT                 ": Input "
 #define STR_PID_DEBUG_OUTPUT                " Output "
 #define STR_INVALID_EXTRUDER_NUM            " - Invalid extruder number !"
-#define STR_MPC_AUTOTUNE_START              "MPC Autotune start for " STR_E
-#define STR_MPC_AUTOTUNE_INTERRUPTED        "MPC Autotune interrupted!"
-#define STR_MPC_AUTOTUNE_FINISHED           "MPC Autotune finished! Put the constants below into Configuration.h"
+#define STR_MPC_AUTOTUNE                    "MPC Autotune"
+#define STR_MPC_AUTOTUNE_START              " start for " STR_E
+#define STR_MPC_AUTOTUNE_INTERRUPTED        " interrupted!"
+#define STR_MPC_AUTOTUNE_FINISHED           " finished! Put the constants below into Configuration.h"
 #define STR_MPC_COOLING_TO_AMBIENT          "Cooling to ambient"
 #define STR_MPC_HEATING_PAST_200            "Heating to over 200C"
 #define STR_MPC_MEASURING_AMBIENT           "Measuring ambient heatloss at "
@@ -279,7 +278,6 @@
 #define STR_S_SEG_PER_SEC                   "S<seg-per-sec>"
 #define STR_DELTA_SETTINGS                  "Delta (L<diagonal-rod> R<radius> H<height> S<seg-per-sec> XYZ<tower-angle-trim> ABC<rod-trim>)"
 #define STR_SCARA_SETTINGS                  "SCARA"
-#define STR_POLAR_SETTINGS                  "Polar"
 #define STR_POLARGRAPH_SETTINGS             "Polargraph"
 #define STR_SCARA_P_T_Z                     "P<theta-psi-offset> T<theta-offset> Z<home-offset>"
 #define STR_ENDSTOP_ADJUSTMENT              "Endstop adjustment"
@@ -453,54 +451,6 @@
   #endif
 #else
   #define STR_K   ""
-#endif
-
-#if HAS_U_AXIS
-  #if AXIS7_NAME == 'U'
-    #define STR_U "U"
-    #define STR_U_MIN "u_min"
-    #define STR_U_MAX "u_max"
-  #elif AXIS7_NAME == 'V'
-    #define STR_U "V"
-    #define STR_U_MIN "v_min"
-    #define STR_U_MAX "v_max"
-  #elif AXIS7_NAME == 'W'
-    #define STR_U "W"
-    #define STR_U_MIN "w_min"
-    #define STR_U_MAX "w_max"
-  #else
-    #error "AXIS7_NAME can only be one of 'U', 'V', or 'W'."
-  #endif
-#else
-  #define STR_U   ""
-#endif
-
-#if HAS_V_AXIS
-  #if AXIS8_NAME == 'V'
-    #define STR_V "V"
-    #define STR_V_MIN "v_min"
-    #define STR_V_MAX "v_max"
-  #elif AXIS8_NAME == 'W'
-    #define STR_V "W"
-    #define STR_V_MIN "w_min"
-    #define STR_V_MAX "w_max"
-  #else
-    #error "AXIS8_NAME can only be one of 'V', or 'W'."
-  #endif
-#else
-  #define STR_V   ""
-#endif
-
-#if HAS_W_AXIS
-  #if AXIS9_NAME == 'W'
-    #define STR_W "W"
-    #define STR_W_MIN "w_min"
-    #define STR_W_MAX "w_max"
-  #else
-    #error "AXIS9_NAME can only be 'W'."
-  #endif
-#else
-  #define STR_W   ""
 #endif
 
 #if EITHER(HAS_MARLINUI_HD44780, IS_TFTGLCD_PANEL)

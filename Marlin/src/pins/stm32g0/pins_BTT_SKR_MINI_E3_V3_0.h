@@ -21,8 +21,6 @@
  */
 #pragma once
 
-#include "env_validate.h"
-
 //#define BOARD_CUSTOM_BUILD_FLAGS -DTONE_CHANNEL=4 -DTONE_TIMER=4 -DTIMER_TONE=4
 
 #ifndef BOARD_INFO_NAME
@@ -136,7 +134,7 @@
 //
 #define HEATER_0_PIN                        PC8   // "HE"
 #define HEATER_BED_PIN                      PC9   // "HB"
-#define FAN0_PIN                            PC6   // "FAN0"
+#define FAN_PIN                             PC6   // "FAN0"
 #define FAN1_PIN                            PC7   // "FAN1"
 #define FAN2_PIN                            PB15  // "FAN2"
 
@@ -313,7 +311,7 @@
     #elif ENABLED(FYSETC_MINI_12864_2_1)
 
       #ifndef NO_CONTROLLER_CUSTOM_WIRING_WARNING
-        #error "CAUTION! FYSETC_MINI_12864_2_1 and clones require wiring modifications. See 'pins_BTT_SKR_MINI_E3_V3_0.h' for details. Define NO_CONTROLLER_CUSTOM_WIRING_WARNING to suppress this warning."
+        #error "CAUTION! FYSETC_MINI_12864_2_1 and clones require wiring modifications. See 'pins_BTT_SKR_MINI_E3_V3_0.h' for details. Define NO_CONTROLLER_CUSTOM_WIRING_WARNING to suppress this warning"
       #endif
 
       /**

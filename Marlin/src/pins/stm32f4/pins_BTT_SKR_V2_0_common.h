@@ -251,8 +251,8 @@
 #ifndef HEATER_BED_PIN
   #define HEATER_BED_PIN                    PD7   // Hotbed
 #endif
-#ifndef FAN0_PIN
-  #define FAN0_PIN                          PB7   // Fan0
+#ifndef FAN_PIN
+  #define FAN_PIN                           PB7   // Fan0
 #endif
 
 #if HAS_CUTTER
@@ -272,16 +272,18 @@
 #endif // SPINDLE_FEATURE || LASER_FEATURE
 
 //
-// SPI pins for TMC2130 stepper drivers
+// Software SPI pins for TMC2130 stepper drivers
 //
-#ifndef TMC_SPI_MOSI
-  #define TMC_SPI_MOSI                      PE14
-#endif
-#ifndef TMC_SPI_MISO
-  #define TMC_SPI_MISO                      PA14
-#endif
-#ifndef TMC_SPI_SCK
-  #define TMC_SPI_SCK                       PE15
+#if ENABLED(TMC_USE_SW_SPI)
+  #ifndef TMC_SW_MOSI
+    #define TMC_SW_MOSI                     PE14
+  #endif
+  #ifndef TMC_SW_MISO
+    #define TMC_SW_MISO                     PA14
+  #endif
+  #ifndef TMC_SW_SCK
+    #define TMC_SW_SCK                      PE15
+  #endif
 #endif
 
 #if HAS_TMC_UART

@@ -51,13 +51,10 @@
 //
 // Limit Switches
 //
-#define X_STOP_PIN                          PC13
-#define Y_STOP_PIN                          PC14
-#define Z_STOP_PIN                          PC15
-
-#ifndef Z_MIN_PROBE_PIN
-  #define Z_MIN_PROBE_PIN                   PB7
-#endif
+#define X_MAX_PIN                           PC13
+#define Y_MAX_PIN                           PC14
+#define Z_MAX_PIN                           PC15
+#define Z_MIN_PIN                           PB7
 
 //
 // Steppers

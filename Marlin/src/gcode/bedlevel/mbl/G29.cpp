@@ -103,48 +103,9 @@ void GcodeSuite::G29() {
       bedlevel.reset();
       mbl_probe_index = 0;
       if (!ui.wait_for_move) {
-        if (parser.seen_test('N'))
-          queue.inject(F("G28" TERN_(CAN_SET_LEVELING_AFTER_G28, "L0")));
-
-        // Position bed horizontally and Z probe vertically.
-        #if HAS_SAFE_BED_LEVELING
-          xyze_pos_t safe_position = current_position;
-          #ifdef SAFE_BED_LEVELING_START_X
-            safe_position.x = SAFE_BED_LEVELING_START_X;
-          #endif
-          #ifdef SAFE_BED_LEVELING_START_Y
-            safe_position.y = SAFE_BED_LEVELING_START_Y;
-          #endif
-          #ifdef SAFE_BED_LEVELING_START_Z
-            safe_position.z = SAFE_BED_LEVELING_START_Z;
-          #endif
-          #ifdef SAFE_BED_LEVELING_START_I
-            safe_position.i = SAFE_BED_LEVELING_START_I;
-          #endif
-          #ifdef SAFE_BED_LEVELING_START_J
-            safe_position.j = SAFE_BED_LEVELING_START_J;
-          #endif
-          #ifdef SAFE_BED_LEVELING_START_K
-            safe_position.k = SAFE_BED_LEVELING_START_K;
-          #endif
-          #ifdef SAFE_BED_LEVELING_START_U
-            safe_position.u = SAFE_BED_LEVELING_START_U;
-          #endif
-          #ifdef SAFE_BED_LEVELING_START_V
-            safe_position.v = SAFE_BED_LEVELING_START_V;
-          #endif
-          #ifdef SAFE_BED_LEVELING_START_W
-            safe_position.w = SAFE_BED_LEVELING_START_W;
-          #endif
-
-          do_blocking_move_to(safe_position);
-        #endif // HAS_SAFE_BED_LEVELING
-
-        queue.inject(F("G29S2"));
-
+        queue.inject(parser.seen_test('N') ? F("G28" TERN(CAN_SET_LEVELING_AFTER_G28, "L0", "") "\nG29S2") : F("G29S2"));
         TERN_(EXTENSIBLE_UI, ExtUI::onLevelingStart());
         TERN_(DWIN_LCD_PROUI, DWIN_LevelingStart());
-
         return;
       }
       state = MeshNext;
