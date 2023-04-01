@@ -38,6 +38,12 @@
   #define MARLIN_EEPROM_SIZE    EEPROM_PAGE_SIZE  // 2K
 #endif
 
+#if ENABLED(BD_SENSOR)
+  #define I2C_BD_SDA_PIN                    PC6
+  #define I2C_BD_SCL_PIN                    PB2
+  #define I2C_BD_DELAY 10                         // (seconds)
+#endif
+
 //
 // Servos
 //
@@ -82,18 +88,16 @@
 #define E0_DIR_PIN                          PB14
 
 //
-// Software SPI pins for TMC2130 stepper drivers
+// SPI pins for TMC2130 stepper drivers
 //
-#if ENABLED(TMC_USE_SW_SPI)
-  #ifndef TMC_SW_MOSI
-    #define TMC_SW_MOSI                     PB5
-  #endif
-  #ifndef TMC_SW_MISO
-    #define TMC_SW_MISO                     PB4
-  #endif
-  #ifndef TMC_SW_SCK
-    #define TMC_SW_SCK                      PB3
-  #endif
+#ifndef TMC_SPI_MOSI
+  #define TMC_SPI_MOSI                      PB5
+#endif
+#ifndef TMC_SPI_MISO
+  #define TMC_SPI_MISO                      PB4
+#endif
+#ifndef TMC_SPI_SCK
+  #define TMC_SPI_SCK                       PB3
 #endif
 
 #if HAS_TMC_UART
@@ -136,7 +140,7 @@
 //
 #define HEATER_0_PIN                        PB12  // "HE"
 #define HEATER_BED_PIN                      PB13  // "HB"
-#define FAN_PIN                             PA8   // "FAN0"
+#define FAN0_PIN                            PA8   // "FAN0"
 #define HEATER_1_PIN                        PA12
 
 //

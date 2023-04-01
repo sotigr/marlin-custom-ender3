@@ -54,7 +54,10 @@ inline stepper_flags_t selected_axis_bits() {
     | (parser.seen_test('Z')        << Z_AXIS),
     | (parser.seen_test(AXIS4_NAME) << I_AXIS),
     | (parser.seen_test(AXIS5_NAME) << J_AXIS),
-    | (parser.seen_test(AXIS6_NAME) << K_AXIS)
+    | (parser.seen_test(AXIS6_NAME) << K_AXIS),
+    | (parser.seen_test(AXIS7_NAME) << U_AXIS),
+    | (parser.seen_test(AXIS8_NAME) << V_AXIS),
+    | (parser.seen_test(AXIS9_NAME) << W_AXIS)
   );
   return selected;
 }
@@ -209,7 +212,7 @@ void try_to_disable(const stepper_flags_t to_disable) {
 void GcodeSuite::M18_M84() {
   if (parser.seenval('S')) {
     reset_stepper_timeout();
-    #if HAS_DISABLE_INACTIVE_AXIS
+    #if HAS_DISABLE_IDLE_AXES
       const millis_t ms = parser.value_millis_from_seconds();
       #if LASER_SAFETY_TIMEOUT_MS > 0
         if (ms && ms <= LASER_SAFETY_TIMEOUT_MS) {
